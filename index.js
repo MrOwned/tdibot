@@ -9,7 +9,8 @@ roblox.login({username: "DaegranBot", password: "bobbyjoe"}).then((success) => {
 
 
 client.on("ready", () => {
-  client.user.setGame(`The Daegran Imperium`);
+  client.user.setGame(`.The Daegran Imperium.`);
+	  client.user.setStatus('idle')
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
