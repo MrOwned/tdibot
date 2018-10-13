@@ -5,11 +5,11 @@ client.login(process.env.BOT_TOKEN)
 
 roblox.login({username: "DaegranBot", password: "bobbyjoe"}).then((success) => {
 
-}).catch(() => {console.log("Cannot log into the client's account!");});
+}).catch(() => {console.log("Sorry, it failed.");});
 
 
 client.on("ready", () => {
-  client.user.setGame(`The Daegran Imperium`);
+  client.user.setGame(`The Daegran Imperium |${client.users.size} users `);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
@@ -36,47 +36,36 @@ function isCommand(command, message){
 }
 
 client.on('message', (message) => {
-	if (message.author.client) return; // Dont answer yourself.
+	if (message.author.bot) return; // Dont answer yourself.
     var args = message.content.split(/[ ]+/)
-
-    function hasRole(members, role){
-    if(pluck(members.roles).includes("Administrator")){
-        return true;
-    } else {
-        return false;
-    }
-}
-
+    
     if(isCommand('Promote', message)){
-      if(!message.member.roles.some(r=>["High Command", "Administrator"].includes(r.name)) ) // OPTIONAL - Checks if the sender has the specified roles to carry on further
-      return message.channel.send("Sorry, but you are not able to use this command.");
     	var username = args[1]
     	if (username){
-    		message.channel.send(`Checking ROBLOX for the Player **${username}**`)
+    		message.channel.send(`Checking ROBLOX for ${username}`)
     		roblox.getIdFromUsername(username)
 			.then(function(id){
 				roblox.getRankInGroup(groupId, id)
 				.then(function(rank){
 					if(maximumRank <= rank){
-						message.channel.send(`${id} is rank ${rank} and not promotable.`)
+						message.channel.send(`${id} is rank ${rank} and cannot be promotable.`)
 					} else {
-						message.channel.send(`${id} is rank ${rank} and promotable.`)
+						message.channel.send(`${id} is rank ${rank} and can be promotable.`)
 						roblox.promote(groupId, id)
 						.then(function(roles){
 							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
-              message.channel.client.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
 						}).catch(function(err){
-							message.channel.send("Sorry but the client failed to promote.")
+							message.channel.send("Failed to promote.")
 						});
 					}
 				}).catch(function(err){
-					message.channel.send("This player does not exist in the group.")
+					message.channel.send("The player cannot be found in the group.")
 				});
-			}).catch(function(err){
-				message.channel.send(`Sorry, but ${username} doesn't exist on ROBLOX.`)
+			}).catch(function(err){ 
+				message.channel.send(`Sorry, but ${username} cannot be found on ROBLOX.`)
 			});
     	} else {
-    		message.channel.send("Please enter a valid username of the player you'd like to promote - demote")
+    		message.channel.send("Please enter a username.")
     	}
     	return;
     }
