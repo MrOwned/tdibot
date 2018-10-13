@@ -3,7 +3,7 @@ var roblox = require('roblox-js');
 var client = new discord.Client();
 client.login(process.env.BOT_TOKEN)
 
-roblox.login({username: "Daegranclient", password: "bobbyjoe"}).then((success) => {
+roblox.login({username: "DaegranBot", password: "bobbyjoe"}).then((success) => {
 
 }).catch(() => {console.log("Cannot log into the client's account!");});
 
@@ -13,11 +13,11 @@ client.on("ready", () => {
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
-client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
-  }
-});
+client.on('message', message => {
+    if(message.content.startsWith("-ping")) {
+            message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");        
+    }
+}
 
 client.on('guildMemberAdd', member => {
   let guild = member.guild;
