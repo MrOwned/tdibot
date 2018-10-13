@@ -1,1 +1,1 @@
-ezyalts: node app.js
+worker: node app.js
