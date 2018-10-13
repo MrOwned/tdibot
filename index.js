@@ -13,6 +13,12 @@ client.on("ready", () => {
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
+client.on('message', msg => {
+  if (msg.content === 'ping') {
+    msg.reply('Pong!');
+  }
+});
+
 client.on('guildMemberAdd', member => {
   let guild = member.guild;
   let user = member.user
