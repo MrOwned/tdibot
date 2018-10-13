@@ -1,8 +1,7 @@
 var discord = require('discord.js');
 var roblox = require('roblox-js');
 var client = new discord.Client();
-var token = "NTAwMDc5MjUxOTQ5NjE3MTgz.DqFvIg.QZ5EmZ_TYB5QGhHY9mCj9Sd_F1I"
-client.login(token)
+client.login(process.env.BOT_TOKEN)
 
 roblox.login({username: "Daegranclient", password: "bobbyjoe"}).then((success) => {
 
@@ -10,7 +9,7 @@ roblox.login({username: "Daegranclient", password: "bobbyjoe"}).then((success) =
 
 
 client.on("ready", () => {
-  client.user.setGame(`Welcome to The Daegran Imperium`);
+  client.user.setGame(`The Daegran Imperium`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
