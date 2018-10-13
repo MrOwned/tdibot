@@ -9,7 +9,7 @@ roblox.login({username: "DaegranBot", password: "bobbyjoe"}).then((success) => {
 
 
 client.on("ready", () => {
-  client.user.setGame(`The Daegran Imperium |${client.users.size} users `);
+  client.user.setGame(`The Daegran Imperium | ${client.users.size} users `);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
